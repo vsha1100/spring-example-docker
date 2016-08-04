@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class SpringExampleDockerApplicationTests {
+public abstract class SpringExampleDockerApplicationTests {
 
 	@Autowired
 	private WebApplicationContext ctx;
