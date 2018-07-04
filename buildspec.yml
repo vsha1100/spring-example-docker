@@ -1,13 +1,22 @@
 version: 0.2
 
 phases:
+  install:
+      commands:
+        - echo installing maven
+        - apt-get update -y
+        - apt-get install -y software-properties-common
+        - apt-get update -y
+        - apt-get install -y maven
   pre_build:
     commands:
+        - echo Logging in to Amazon ECR...
+        - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
 #      - pip install awscli --upgrade --user
 #      - echo `aws --version`
-      - echo developer name $developer
-      - echo developer age $age
-      - mvn --version
+#      - echo developer name $developer
+#      - echo developer age $age
+#      - mvn --version
 #      - $(aws ecr get-login --region ${region} --no-include-email)
 #      - REPOSITORY_URI=${repository_url}
 #      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
@@ -15,17 +24,21 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - echo building project
+      - mvn package
       - echo Building the Docker image...
+      - docker build -t apic_gov .
+      - docker tag apic_gov:latest 691374633390.dkr.ecr.us-east-2.amazonaws.com/apic_gov:latest
 #      - docker build --build-arg build_without="development test" --build-arg rails_env="production" -t $REPOSITORY_URI:latest .
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-#      - echo Build completed on `date`
-#      - echo Pushing the Docker images...
-#      - docker push $REPOSITORY_URI:latest
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push 691374633390.dkr.ecr.us-east-2.amazonaws.com/apic_gov:latest
 #      - docker push $REPOSITORY_URI:$IMAGE_TAG
-#      - echo Writing image definitions file...
-      - printf '[{"name":"web","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo Writing image definitions file...
+      - printf '[{"name":"APIC-GOV-CONTAINER","imageUri":"%s"}]' 691374633390.dkr.ecr.us-east-2.amazonaws.com/apic_gov:latest > imagedefinitions.json
 #      - echo upgrading db-migrate task definitions
 #      - aws ecs run-task --launch-type FARGATE --cluster ${cluster_name} --task-definition production_db_migrate --network-configuration "awsvpcConfiguration={subnets=[${subnet_id}],securityGroups=[${security_group_ids}]}"
 artifacts:
