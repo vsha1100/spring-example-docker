@@ -7,6 +7,7 @@ phases:
 #      - echo `aws --version`
       - echo developer name $developer
       - echo developer age $age
+      - mvn --version
 #      - $(aws ecr get-login --region ${region} --no-include-email)
 #      - REPOSITORY_URI=${repository_url}
 #      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
