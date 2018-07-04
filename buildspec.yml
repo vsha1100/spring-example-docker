@@ -5,13 +5,11 @@ phases:
       commands:
         - echo installing maven
         - apt-get update -y
-        - apt-get install -y software-properties-common
-        - apt-get update -y
         - apt-get install -y maven
   pre_build:
     commands:
         - echo Logging in to Amazon ECR...
-        - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+        - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
 #      - pip install awscli --upgrade --user
 #      - echo `aws --version`
 #      - echo developer name $developer
