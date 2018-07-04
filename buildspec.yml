@@ -25,7 +25,7 @@ phases:
       - echo building project
       - mvn package
       - echo Building the Docker image...
-      - docker build -t apic_gov .
+      - docker build -t apic_gov:latest .
       - docker tag apic_gov:latest 691374633390.dkr.ecr.us-east-2.amazonaws.com/apic_gov:latest
 #      - docker build --build-arg build_without="development test" --build-arg rails_env="production" -t $REPOSITORY_URI:latest .
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
