@@ -3,10 +3,7 @@ version: 0.2
 phases:
   install:
       commands:
-        - echo installing maven
-        - apt-get update -y
-        - apt-get install -y openjdk-8-jdk
-        - apt-get install -y maven
+        - echo installing
   pre_build:
     commands:
         - echo Logging in to Amazon ECR...
