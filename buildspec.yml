@@ -5,6 +5,7 @@ phases:
       commands:
         - echo installing maven
         - apt-get update -y
+        - apt-get install -y openjdk-8-jdk
         - apt-get install -y maven
   pre_build:
     commands:
