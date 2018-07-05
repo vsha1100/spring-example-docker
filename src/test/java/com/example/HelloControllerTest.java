@@ -17,8 +17,8 @@ public class HelloControllerTest extends SpringExampleDockerApplicationTests{
 
     @Test
     public void sayHelloYourName() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/?firstName=Antoine"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/?name=Antoine"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello Antoine"));
+                .andExpect(content().string("Hello Antoine!"));
     }
 }
