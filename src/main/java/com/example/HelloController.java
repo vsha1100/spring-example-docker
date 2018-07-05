@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity sayHello(@RequestParam(value = "name", required = false, defaultValue = "World!") String firstName){
+    public ResponseEntity sayHello(@RequestParam(value = "name", required = false, defaultValue = "World") String firstName){
         return ResponseEntity.ok("Hello "+ firstName + "!");
     }
 }
